@@ -133,10 +133,8 @@ public class GameManager : MonoBehaviour
     private void CreateCards()
     {
         // 격자 크기 설정 (예: 4x5 격자)
-        int gridRows = 4;  // 행의 수
         int gridColumns = 5;  // 열의 수
-        float cardWidth = 2f;  // 카드의 너비 (실제 카드 프리팹의 크기에 맞게 조정)
-        float cardHeight = 3f;  // 카드의 높이 (실제 카드 프리팹의 크기에 맞게 조정)
+
         float xOffset = 2f;  // X축 간격
         float yOffset = 3f;  // Y축 간격
 
@@ -146,9 +144,11 @@ public class GameManager : MonoBehaviour
             // 카드 프리팹을 생성하고 위치를 설정
             GameObject cardObj = Instantiate(cardPrefab, cardContainer);
 
+            Card cardPrefabBack = cardPrefab.GetComponent<Card>();
+
             Card cardComponent = cardObj.GetComponent<Card>();
             cardComponent.frontSprite = cards[i].frontSprite;
-            cardComponent.backSprite = cardSprites[0];  // 뒷면 이미지는 첫 번째 카드 뒷면으로 설정
+            cardComponent.backSprite = cardPrefabBack.backSprite;// 뒷면 이미지는 첫 번째 카드 뒷면으로 설정
 
             // 그리드 위치 계산
             int row = i / gridColumns;  // 현재 카드가 몇 번째 행에 위치할지 계산
